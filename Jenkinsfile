@@ -8,7 +8,7 @@ pipeline {
     }
     stage('clean install') {
       steps {
-        sh '''cp .env.example .evn
+        sh '''cp .env.example .env
 composer install
 php artisan config:clear
 php artisan cache:clear
