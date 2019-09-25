@@ -8,7 +8,7 @@ pipeline {
             sh 'echo "uninstall";'
           }
         }
-        stage('') {
+        stage('rm composer.lock') {
           steps {
             sh 'rm composer.lock'
           }
@@ -33,6 +33,27 @@ php artisan key:generate
     stage('testing') {
       steps {
         sh 'phpunit'
+      }
+    }
+    stage('building js') {
+      parallel {
+        stage('building php') {
+          steps {
+            sh '''composer install --optimize-autoloader --no-dev
+php artisan config:cache
+'''
+          }
+        }
+        stage('build js') {
+          steps {
+            sh 'npm run production'
+          }
+        }
+      }
+    }
+    stage('create zip') {
+      steps {
+        sh 'echo "zip";'
       }
     }
   }
