@@ -10,7 +10,7 @@ pipeline {
         }
         stage('rm composer.lock') {
           steps {
-            sh 'rm composer.lock'
+            sh '#rm composer.lock'
           }
         }
       }
