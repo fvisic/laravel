@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('uninstall all') {
       steps {
-        sh 'print "uninstall";'
+        sh 'echo "uninstall";'
       }
     }
     stage('clean install') {
