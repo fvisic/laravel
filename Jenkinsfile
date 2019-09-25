@@ -2,8 +2,17 @@ pipeline {
   agent any
   stages {
     stage('uninstall all') {
-      steps {
-        sh 'echo "uninstall";'
+      parallel {
+        stage('uninstall all') {
+          steps {
+            sh 'echo "uninstall";'
+          }
+        }
+        stage('') {
+          steps {
+            sh 'rm composer.lock'
+          }
+        }
       }
     }
     stage('clean install') {
@@ -23,7 +32,7 @@ php artisan key:generate
     }
     stage('testing') {
       steps {
-        sh 'phpunit test'
+        sh 'phpunit'
       }
     }
   }
