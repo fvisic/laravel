@@ -46,7 +46,8 @@ php artisan config:cache
         }
         stage('build js') {
           steps {
-            sh 'npm run production'
+            sh '''npm install
+npm run production'''
           }
         }
       }
